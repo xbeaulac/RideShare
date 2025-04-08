@@ -1,6 +1,6 @@
-from actions import *
+import database
 
-db = Database()
+db = database.Database()
 
 print("Welcome to RideShare! ")
 username = None
