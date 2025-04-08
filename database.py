@@ -42,6 +42,51 @@ class Database:
         self.connection.commit()
         return self.cursor.fetchone()
 
+    def viewRating(self, username):
+        query = ("SELECT AVG(rating) "
+                 "FROM Ride "
+                 "WHERE driver = %s")
+        self.cursor.execute(query, [username])
+        self.connection.commit()
+        res = self.cursor.fetchone()[0]
+        if res is None:
+            return "No ratings yet."
+        else:
+            return res
+
+    def getIsActive(self, username):
+        query = ("SELECT active "
+                 "FROM Driver "
+                 "WHERE username = %s")
+        self.cursor.execute(query, [username])
+        self.connection.commit()
+        return self.cursor.fetchone()[0]
+
+    def toggleDrivingMode(self, username):
+        res = self.getIsActive(username)
+        if res == 0:
+            query = ("UPDATE Driver "
+                     "SET active = TRUE "
+                     "WHERE username = %s")
+            self.cursor.execute(query, [username])
+            self.connection.commit()
+            return "Driving mode activated."
+        else:
+            query = ("UPDATE Driver "
+                     "SET active = FALSE "
+                     "WHERE username = %s")
+            self.cursor.execute(query, [username])
+            self.connection.commit()
+            return "Driving mode deactivated."
+
+    def viewRidesDriven(self, username):
+        query = ("SELECT rider, pickUpLocation, dropOffLocation, rating "
+                 "FROM Ride "
+                 "WHERE driver = %s")
+        self.cursor.execute(query, [username])
+        self.connection.commit()
+        return self.cursor.fetchall()
+
     def close(self):
         self.cursor.close()
         self.connection.close()

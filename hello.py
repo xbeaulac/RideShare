@@ -1,6 +1,7 @@
-import database
+from database import Database
+from tabulate import tabulate
 
-db = database.Database()
+db = Database()
 
 print("Welcome to RideShare! ")
 username = None
@@ -53,21 +54,25 @@ while True:
     if username is None or (role != "rider" and role != "driver"):
         break
     print()
-    print(f"{username} ({role})")
-    print("Which would you like to do?")
+
     if role == 'driver':
+        isActive = db.getIsActive(username)
+        print(f"{username} ({role}) is {'active' if isActive == 1 else 'inactive'}")
+        print("Which would you like to do?")
         print("(a) View rating")
-        print("(b) Switch driver mode")
+        print(f"(b) Set status to {'inactive' if isActive == 1 else 'active'}")
         print("(c) View rides")
         print("(exit) Exit")
         user_input = input("Enter your choice: ")
         print()
         if user_input == "a":
-            pass
+            print("Your rating:", db.viewRating(username))
         elif user_input == "b":
-            pass
+            print(db.toggleDrivingMode(username))
         elif user_input == "c":
-            pass
+            rides = db.viewRidesDriven(username)
+            headers = ("Rider", "From", "To", "Rating")
+            print(tabulate(rides, headers=headers, tablefmt="grid"))
         elif user_input == "exit":
             print("Thank you for using RideShare!")
             break
@@ -75,6 +80,8 @@ while True:
             print("Invalid input.")
             continue
     elif role == 'rider':
+        print(f"{username} ({role})")
+        print("Which would you like to do?")
         print("(a) Find a driver")
         print("(b) Rate my driver")
         print("(c) View rides")
