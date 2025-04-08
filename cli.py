@@ -82,13 +82,18 @@ while True:
     elif role == 'rider':
         print(f"{username} ({role})")
         print("Which would you like to do?")
-        print("(a) Find a driver")
+        print("(a) Take a ride")
         print("(b) Rate my driver")
         print("(c) View rides")
         print("(exit) Exit")
         user_input = input("Enter your choice: ")
         if user_input == "a":
-            pass
+            driver_username, driver_first_name, driver_last_name = db.getActiveDriver()
+            print(f"Located driver: {driver_first_name} {driver_last_name}")
+            pick_up_location = input("Pick up location: ")
+            drop_off_location = input("Drop off location: ")
+            db.takeRide(username, driver_username, pick_up_location, drop_off_location)
+            print(f"{driver_first_name} drove you from {pick_up_location} to {drop_off_location}.")
         elif user_input == "b":
             pass
         elif user_input == "c":

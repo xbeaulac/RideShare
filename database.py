@@ -87,6 +87,21 @@ class Database:
         self.connection.commit()
         return self.cursor.fetchall()
 
+    def getActiveDriver(self):
+        query = ("SELECT username, firstName, lastName "
+                 "FROM driver "
+                 "WHERE active = TRUE "
+                 "LIMIT 1")
+        self.cursor.execute(query)
+        self.connection.commit()
+        return self.cursor.fetchone()
+
+    def takeRide(self, username, driverUsername, pickUpLocation, dropOffLocation):
+        query = ("INSERT INTO Ride (rider, driver, pickUpLocation, dropOffLocation) "
+                 "VALUES (%s, %s, %s, %s)")
+        self.cursor.execute(query, [username, driverUsername, pickUpLocation, dropOffLocation])
+        self.connection.commit()
+
     def close(self):
         self.cursor.close()
         self.connection.close()
