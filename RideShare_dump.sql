@@ -18,7 +18,8 @@
 --
 -- Table structure for table `Driver`
 --
-
+CREATE DATABASE IF NOT EXISTS RideShare;
+USE RideShare;
 DROP TABLE IF EXISTS `Driver`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
