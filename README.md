@@ -1,8 +1,8 @@
 # README.md
 
 - ## Identifying Information
-    - Authors: Maksim Popov (2417735) & Xander Beaulac (<ADD STUDENT ID>)
-    - mpopov@chapman.edu, beaulac@chapman.edu <CHECK EMAIL>
+    - Authors: Maksim Popov (2417735) & Xander Beaulac (2451993)
+    - mpopov@chapman.edu, beaulac@chapman.edu 
     - CPSC408 - 02
     - A5 - RideShare Lab
     - Prof. Sierra Clibourne
@@ -11,16 +11,22 @@
     - ### .py (App files)
         - `database.py`
         - `cli.py`
-        - <NOT SURE IF ANY OTHER FILES WILL BE SUBMITTED
     - ### SQL Dump 
-        - <NOT SURE WHAT DUMP WILL BE NAMED>
+        - `RideShare_dump.sql`
+    - ### Package Files
+        - `uv.lock`
+        - `pyproject.toml`
+    - ### SQL Queries
+        - `queries.sql`
+    - ### Misc
+        - `.gitignore`
+        - `.python-version`
 
 - ## Known errors/limitations/deviations from spec
     - As far as we are concerned, the code does everything that it should and has no errors, limitations, or deviations from spec.
-    - 
 - ## References 
-    - All code was written with previous knowledge or material covered in class.
-    - <ADD ANY REFERENCES YOU MIGHT HAVE USED>
+    - All code was written with previous knowledge or material covered in class, or unless specified below:
+    - [mySQL manual] (https://dev.mysql.com/doc/connector-python/en/connector-python-examples.html)
 
 - ## Instructions for running 
     - Load `.sql` dump file into local mySQL server instance
