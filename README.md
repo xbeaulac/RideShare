@@ -26,7 +26,7 @@
     - As far as we are concerned, the code does everything that it should and has no errors, limitations, or deviations from spec.
 - ## References 
     - All code was written with previous knowledge or material covered in class, or unless specified below:
-    - [mySQL manual] (https://dev.mysql.com/doc/connector-python/en/connector-python-examples.html)
+    - [mySQL manual](https://dev.mysql.com/doc/connector-python/en/connector-python-examples.html) 
 
 - ## Instructions for running 
     - Load `.sql` dump file into local mySQL server instance
