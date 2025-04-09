@@ -102,6 +102,16 @@ class Database:
         self.cursor.execute(query, [username, driverUsername, pickUpLocation, dropOffLocation])
         self.connection.commit()
 
+    def getMostRecentRide(self, username):
+        query = ("SELECT driver, pickUpLocation, dropOffLocation, rating "
+                 "FROM Ride "
+                 "WHERE rider = %s "
+                 "ORDER BY rideID "
+                 "DESC LIMIT 1")
+        self.cursor.execute(query, [username])
+        self.connection.commit()
+        return self.cursor.fetchone()
+
     def close(self):
         self.cursor.close()
         self.connection.close()

@@ -95,7 +95,9 @@ while True:
             db.takeRide(username, driver_username, pick_up_location, drop_off_location)
             print(f"{driver_first_name} drove you from {pick_up_location} to {drop_off_location}.")
         elif user_input == "b":
-            pass
+            headers = ("Rider", "From", "To", "Rating")
+            print(tabulate([db.getMostRecentRide(username)], headers=headers, tablefmt="grid"))
+            print("Is this the ride you would like to rate?")
         elif user_input == "c":
             pass
         elif user_input == "exit":
