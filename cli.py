@@ -71,7 +71,7 @@ while True:
             print(db.toggleDrivingMode(username))
         elif user_input == "c":
             rides = db.viewRidesDriven(username)
-            headers = ("Rider", "From", "To", "Rating")
+            headers = ("Rider", "Pick Up", "Drop Off", "Rating")
             print(tabulate(rides, headers=headers, tablefmt="grid"))
         elif user_input == "exit":
             print("Thank you for using RideShare!")
@@ -95,11 +95,26 @@ while True:
             db.takeRide(username, driver_username, pick_up_location, drop_off_location)
             print(f"{driver_first_name} drove you from {pick_up_location} to {drop_off_location}.")
         elif user_input == "b":
-            headers = ("Rider", "From", "To", "Rating")
-            print(tabulate([db.getMostRecentRide(username)], headers=headers, tablefmt="grid"))
-            print("Is this the ride you would like to rate?")
+            ride_id, rider, pick_up_location, drop_off_location, rating = db.getMostRecentRide(username)
+            headers = ("Rider", "From", "Drop Off", "Rating")
+            print(tabulate([[rider, pick_up_location, drop_off_location, rating]], headers=headers, tablefmt="grid"))
+            is_correct_ride = input("Is this the ride you would like to rate? (y/n): ")
+            if is_correct_ride == "y":
+                rating = input("Rating (1 to 5): ")
+                db.setRating(ride_id, rating)
+                print(f"Set rating to {rating}.")
+            elif is_correct_ride == "n":
+                rides = db.viewRidesRidden(username)
+                headers = ("Id", "Rider", "Pick Up", "Drop Off", "Rating")
+                print(tabulate(rides, headers=headers, tablefmt="grid"))
+                ride_id = input("Enter ride ID of ride to rate: ")
+                rating = input("Rating (1 to 5): ")
+                db.setRating(ride_id, rating)
+                print(f"Set rating to {rating}.")
         elif user_input == "c":
-            pass
+            rides = db.viewRidesRidden(username)
+            headers = ("Id", "Rider", "Pick Up", "Drop Off", "Rating")
+            print(tabulate(rides, headers=headers, tablefmt="grid"))
         elif user_input == "exit":
             print("Thank you for using RideShare!")
             break

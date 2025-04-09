@@ -103,7 +103,7 @@ class Database:
         self.connection.commit()
 
     def getMostRecentRide(self, username):
-        query = ("SELECT driver, pickUpLocation, dropOffLocation, rating "
+        query = ("SELECT rideID, driver, pickUpLocation, dropOffLocation, rating "
                  "FROM Ride "
                  "WHERE rider = %s "
                  "ORDER BY rideID "
@@ -111,6 +111,21 @@ class Database:
         self.cursor.execute(query, [username])
         self.connection.commit()
         return self.cursor.fetchone()
+
+    def setRating(self, rideID, rating):
+        query = ("UPDATE Ride "
+                 "SET rating = %s "
+                 "WHERE rideID = %s")
+        self.cursor.execute(query, [rating, rideID])
+        self.connection.commit()
+
+    def viewRidesRidden(self, username):
+        query = ("SELECT rideID, driver, pickUpLocation, dropOffLocation, rating "
+                 "FROM Ride "
+                 "WHERE rider = %s")
+        self.cursor.execute(query, [username])
+        self.connection.commit()
+        return self.cursor.fetchall()
 
     def close(self):
         self.cursor.close()
